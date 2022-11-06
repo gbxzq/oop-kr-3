@@ -5,7 +5,7 @@
 class MainMenu
 {
 public:
-  MainMenu(float width, float height);
+  MainMenu();
 
   void draw(sf::RenderWindow &window);
 

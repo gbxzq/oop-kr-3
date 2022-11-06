@@ -2,11 +2,14 @@
 #include <SFML/Graphics.hpp>
 
 #include "MainMenu.hpp"
+#include "Game.hpp"
 
 int main()
 {
-  sf::RenderWindow WMainMenu(sf::VideoMode(800, 600), "Main menu");
-  MainMenu mainMenu(WMainMenu.getSize().x, WMainMenu.getSize().y);
+  sf::RenderWindow WMainMenu(sf::VideoMode(800, 600), "Game");
+  MainMenu mainMenu;
+  Game game;
+  bool isGameStarted = false;
 
   while (WMainMenu.isOpen())
   {
@@ -19,12 +22,33 @@ int main()
         WMainMenu.close();
         break;
 
+      case sf::Event::KeyPressed:
+        if (event.key.code == sf::Keyboard::D)
+        {
+          game.firstShipSprite.move(3, 0);
+          break;
+        }
+        if (event.key.code == sf::Keyboard::W)
+        {
+          game.firstShipSprite.move(0, -3);
+          break;
+        }
+        if (event.key.code == sf::Keyboard::A)
+        {
+          game.firstShipSprite.move(-3, 0);
+          break;
+        }
+        if (event.key.code == sf::Keyboard::S)
+        {
+          game.firstShipSprite.move(0, 3);
+          break;
+        }
+        break;
+
       case sf::Event::MouseButtonPressed:
         if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 333 && event.mouseButton.x <= 467 && event.mouseButton.y >= 271 && event.mouseButton.y <= 330)
         {
-          std::cout << "the left button was pressed" << std::endl;
-          std::cout << "mouse x: " << event.mouseButton.x << std::endl;
-          std::cout << "mouse y: " << event.mouseButton.y << std::endl;
+          isGameStarted = true;
         }
         break;
 
@@ -34,7 +58,7 @@ int main()
     }
 
     WMainMenu.clear();
-    mainMenu.draw(WMainMenu);
+    game.draw(WMainMenu);
     WMainMenu.display();
   }
 

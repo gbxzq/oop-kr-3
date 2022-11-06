@@ -2,7 +2,7 @@
 
 #include "MainMenu.hpp"
 
-MainMenu::MainMenu(float width, float height)
+MainMenu::MainMenu()
 {
   if (!font.loadFromFile("fonts/arial.ttf"))
   {
